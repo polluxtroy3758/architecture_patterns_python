@@ -1,7 +1,8 @@
 from __future__ import annotations
+
 from dataclasses import dataclass
 from datetime import date
-from typing import Optional, List, Set
+from typing import List, Optional, Set
 
 
 class OutOfStock(Exception):
@@ -17,7 +18,7 @@ def allocate(line: OrderLine, batches: List[Batch]) -> str:
         raise OutOfStock(f"Out of stock for sku {line.sku}")
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class OrderLine:
     orderid: str
     sku: str
